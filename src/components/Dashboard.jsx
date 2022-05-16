@@ -12,10 +12,7 @@ export const Dashboard = () => {
     volume: "",
   });
   const [store, setStore] = useState([]);
-  const [color, setColor] = useState("");
-  const colorgenrator = () => {
-    setColor(Math.random().toString(16));
-  };
+  const [color, setColor] = useState(false);
   const userSymbol = (e) => {
     setSymbol({
       ...symbol,
@@ -30,7 +27,6 @@ export const Dashboard = () => {
   const subscribeSymbol = () => {
     setStore([...store, symbol]);
   };
-
   return (
     <>
       <h2>dashBoard</h2>
@@ -81,12 +77,24 @@ export const Dashboard = () => {
                   let data = item.industry.toLowerCase();
                   let mydata =
                     item.industry.charAt(0).toUpperCase() + data.slice(1);
+
                   return (
                     <tr>
                       <td>
                         {item.symbol.toUpperCase()}
-                        <td style={{ color: `#${color}` }}>{mydata}</td>
+                        <td
+                          style={{
+                            color: item.status == true ? "red" : "blue",
+                          }}
+                        >
+                          {mydata}
+                        </td>
+                        <td>{item.price}</td>
                       </td>
+                      <td>{item.h_price}</td>
+                      <td>{item.l_price}</td>
+                      <td>{item.c_price}</td>
+                      <td>{item.volume}</td>
                     </tr>
                   );
                 })}
